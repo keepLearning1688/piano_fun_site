@@ -1,11 +1,22 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { createClient } from '@supabase/supabase-js'
+const supabase = createClient(import.meta.env.SUPABASE_URL, import.meta.env.SUPABASE_ANON_KEY)
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Fetch awards from your database
+const { data: awards } = await supabase.from('awards').select('*')
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html>
+  <body>
+    <h1>Student Awards</h1>
+    <div class="grid">
+      {awards?.map((award) => (
+        <div class="card">
+          <img src={award.photo_url} alt={award.student_name} width="200"/>
+          <h3>{award.student_name}</h3>
+          <p>{award.award_title} ({award.year})</p>
+        </div>
+      ))}
+    </div>
+  </body>
+</html>
