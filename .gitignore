@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Build output (the "dist" folder Cloudflare creates)
+dist/
+
+# Environment variables (CRITICAL: hides your Supabase keys)
+.env
+.env.local
+
+# Tooling
+.DS_Store
+.idea
