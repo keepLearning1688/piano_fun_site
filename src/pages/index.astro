@@ -1,22 +1,144 @@
 ---
-import { createClient } from '@supabase/supabase-js'
-const supabase = createClient(import.meta.env.SUPABASE_URL, import.meta.env.SUPABASE_ANON_KEY)
-
-// Fetch awards from your database
-const { data: awards } = await supabase.from('awards').select('*')
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html>
-  <body>
-    <h1>Student Awards</h1>
-    <div class="grid">
-      {awards?.map((award) => (
-        <div class="card">
-          <img src={award.photo_url} alt={award.student_name} width="200"/>
-          <h3>{award.student_name}</h3>
-          <p>{award.award_title} ({award.year})</p>
-        </div>
-      ))}
+<Layout>
+  <main class="container">
+    <div class="header">
+      <h1>Meet the Teacher</h1>
+      <p>Inspiring a lifelong love of music, one key at a time.</p>
     </div>
-  </body>
-</html>
+
+    <div class="about-grid">
+      <div class="image-wrapper">
+        <!-- Replace this with a real photo later -->
+        <div class="placeholder-photo">
+          <span>Teacher Photo</span>
+        </div>
+      </div>
+
+      <div class="bio-content">
+        <h2>Hello, I'm [Teacher's Name]</h2>
+        <p>
+          Welcome to my studio! I believe that everyone has music inside them waiting to be discovered. With over [X] years of experience playing and teaching the piano, my goal is to provide a supportive, engaging, and fun environment for students of all ages.
+        </p>
+        <p>
+          Whether you are a complete beginner learning your first scales, or an advanced student preparing for recitals, I tailor my lessons to fit your unique learning style and musical goals.
+        </p>
+
+        <div class="credentials">
+          <h3>My Philosophy</h3>
+          <ul>
+            <li>🎵 Focus on building strong foundational techniques.</li>
+            <li>🎵 Nurture creativity through expression and theory.</li>
+            <li>🎵 Make learning engaging and stress-free.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  :root {
+    --primary: #2c3e50;
+    --accent: #d35400;
+    --text-color: #333;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .header h1 {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .header p {
+    font-size: 1.2rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem; /* Matched the gap from the contact page */
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .image-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .placeholder-photo {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 4/5;
+    background-color: #e0e0e0;
+    border-radius: 16px; /* Matched the form card rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Matched the form card shadow */
+  }
+
+  .bio-content h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .bio-content p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 1.5rem;
+  }
+
+  .credentials {
+    background: white;
+    padding: 2.5rem; /* Matched form padding */
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--accent);
+  }
+
+  .credentials h3 {
+    margin-top: 0;
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .credentials ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .credentials li {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    color: #555;
+  }
+</style>
