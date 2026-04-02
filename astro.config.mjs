@@ -2,20 +2,15 @@ import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-// 'static' is now the default and handles everything she needs
   output: 'server',
   adapter: cloudflare({
-    imageService: 'passthrough'
+    // 'advanced' is the key here for Astro 6.
+    // It puts the _worker.js file directly in the dist folder.
+    mode: 'advanced',
   }),
   vite: {
     ssr: {
-      // This tells the builder NOT to bundle Supabase
-      // but to let the Cloudflare environment handle it.
       external: ['@supabase/supabase-js']
-    },
-    optimizeDeps: {
-      // This ensures the local development server also works.
-      exclude: ['@supabase/supabase-js']
     }
   }
 });
