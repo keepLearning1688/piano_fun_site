@@ -1,7 +1,7 @@
 ---
 // src/layouts/Layout.astro
-// This imports Astro's native app-like page transitions
-import { ViewTransitions } from 'astro:transitions';
+// UPDATED FOR ASTRO 5+: ViewTransitions is now called ClientRouter
+import { ClientRouter } from 'astro:transitions';
 ---
 
 <html lang="en">
@@ -9,8 +9,8 @@ import { ViewTransitions } from 'astro:transitions';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Piano Studio</title>
-    <!-- This single tag enables dynamic crossfades between pages -->
-    <ViewTransitions />
+    <!-- The updated tag for smooth page crossfades -->
+    <ClientRouter />
   </head>
   <body>
     <!-- Floating, pill-shaped navbar typical of modern Pixel UI -->
@@ -22,7 +22,6 @@ import { ViewTransitions } from 'astro:transitions';
         <div class="nav-links">
           <a href="/">About</a>
           <a href="/contact">Contact</a>
-          <a href="/students">Students</a>
         </div>
       </nav>
     </div>
@@ -54,7 +53,6 @@ import { ViewTransitions } from 'astro:transitions';
     margin: 0;
     background-color: var(--surface);
     color: var(--on-surface);
-    /* System fonts fall back to the native OS font, mimicking Android's Product Sans */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     display: flex;
     flex-direction: column;
@@ -77,10 +75,10 @@ import { ViewTransitions } from 'astro:transitions';
     justify-content: space-between;
     align-items: center;
     background-color: var(--nav-bg);
-    backdrop-filter: blur(16px); /* The frosted glass effect */
+    backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     padding: 8px 16px;
-    border-radius: 100px; /* Fully rounded pill shape */
+    border-radius: 100px;
     width: 100%;
     max-width: 960px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
@@ -99,12 +97,12 @@ import { ViewTransitions } from 'astro:transitions';
   }
 
   .nav-brand a:active {
-    transform: scale(0.92); /* Android tap squish */
+    transform: scale(0.92);
   }
 
   .nav-links {
     display: flex;
-    gap: 4px; /* Space between pill buttons */
+    gap: 4px;
   }
 
   .nav-links a {
@@ -113,25 +111,21 @@ import { ViewTransitions } from 'astro:transitions';
     font-size: 1rem;
     font-weight: 600;
     padding: 10px 20px;
-    border-radius: 100px; /* Pill-shaped hover targets */
-    /* This cubic-bezier is the exact math Google uses for smooth Android animations */
+    border-radius: 100px;
     transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
   }
 
-  /* Pixel-style Hover States */
   .nav-links a:hover {
     background-color: var(--primary-container);
     color: var(--on-primary-container);
   }
 
-  /* Pixel-style Tap States */
   .nav-links a:active {
     transform: scale(0.92);
     background-color: var(--primary);
     color: white;
   }
 
-  /* Smooth entry animation when you first load the site */
   .page-content {
     flex: 1;
     animation: slideUpFade 0.7s cubic-bezier(0.2, 0, 0, 1);
