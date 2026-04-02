@@ -2,11 +2,10 @@ import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-// Use 'hybrid' so it creates a physical 'dist' folder for the images/bio
-  // but still allows the 'Awards' to talk to Supabase.
-  output: 'hybrid',
+// 'static' is now the default and handles everything she needs
+  output: 'static',
   adapter: cloudflare({
-    mode: 'directory', // This is the secret fix for "Output directory not found"
+    mode: 'directory', // Keeps our 'dist' folder fix active
   }),
   vite: {
     ssr: {
