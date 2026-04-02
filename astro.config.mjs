@@ -3,7 +3,12 @@ import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    // This forces the output into the standard 'dist' folder
+    platformProxy: {
+      enabled: true,
+    },
+  }),
   vite: {
     ssr: {
       // This tells the builder NOT to bundle Supabase
