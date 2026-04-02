@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  output: 'server',
+  output: 'static',
   adapter: cloudflare({
     // This forces the output into the standard 'dist' folder
     platformProxy: {
