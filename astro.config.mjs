@@ -3,10 +3,9 @@ import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
 // 'static' is now the default and handles everything she needs
-  output: 'static',
+  output: 'server',
   adapter: cloudflare({
-    mode: 'directory', // Keeps our 'dist' folder fix active
-    imageService: 'cloudflare-binding' // Optimized for piano/teacher photos
+    imageService: 'passthrough'
   }),
   vite: {
     ssr: {
@@ -18,9 +17,5 @@ export default defineConfig({
       // This ensures the local development server also works.
       exclude: ['@supabase/supabase-js']
     }
-  },
-  // This helps Cloudflare find the home page
-  build: {
-    format: 'directory'
   }
 });
